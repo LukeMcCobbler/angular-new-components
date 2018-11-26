@@ -1,0 +1,11 @@
+<ng-template #rt let-r="result" let-t="term">
+  <ngb-highlight [result]="getValueWithKey(r)" [term]="t"></ngb-highlight>
+</ng-template>
+<div>
+  <input id="typeahead-basic" type="text" class="form-control" [editable]="false" [(ngModel)]="keyModel" (ngModelChange)="updateChanges()" [ngbTypeahead]="search"
+    [resultTemplate]="rt" [inputFormatter]="valueExtractor" />
+  <pre>{{keyModel|json}}</pre>
+  <pre>
+      {{lookupList|json}}
+    </pre>
+</div>
