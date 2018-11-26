@@ -8,7 +8,8 @@ import { KeyValuePair } from '../entities/KeyValuePair'
 export class KeyPickerTestBedComponent implements OnInit {
   testModel: {
     lookupListForPicker: KeyValuePair<string, string>[],
-    pickedKey: string
+    pickedKey: string,
+    pickedKeyList:string[]
   }
   constructor() { }
   ngOnInit() {
@@ -18,7 +19,7 @@ export class KeyPickerTestBedComponent implements OnInit {
         { "Key": "A", "Value": "Alpha" },
         { "Key": "B", "Value": "Beta" },
         { "Key": "G", "Value": "Gamma" }
-      ], pickedKey: "B"
+      ], pickedKey: "B",pickedKeyList:["A","B"]
     };
   }
 }

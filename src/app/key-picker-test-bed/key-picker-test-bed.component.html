@@ -1,4 +1,5 @@
 <div>
+  <app-multi-key-picker [(ngModel)]="testModel.pickedKeyList"></app-multi-key-picker>
   <app-key-picker [lookupList]="testModel.lookupListForPicker" [(ngModel)]="testModel.pickedKey" ></app-key-picker>  
   {{testModel|json}}
 
