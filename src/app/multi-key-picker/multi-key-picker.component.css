@@ -1,0 +1,17 @@
+.ng-value {
+	font-size: 0.9em;
+	margin-bottom: 5px;
+	background-color: #f5faff;
+	border-radius: 2px;
+	border: 1px solid #c2e0ff;
+    margin-right: 5px;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+.ng-value .ng-value-label {
+	display: inline-block;
+	padding: 0 5px 0 5px;
+}
+.ng-value .ng-value-icon.left {
+	border-right: 1px solid #c2e0ff;
+}

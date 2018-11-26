@@ -31,17 +31,17 @@ export class MultiKeyPickerComponent implements OnInit {
    * Invoked when the model has been touched
    */
   onTouched: () => void = () => { };
-///////////////
-    // OVERRIDES //
-    ///////////////
+  ///////////////
+  // OVERRIDES //
+  ///////////////
 
-    /**
-     * Writes a new item to the element.
-     * @param value the value
-     */
-    writeValue(value: string[]): void {
-      this.keyListModel = value;
-      this.updateChanges();
+  /**
+   * Writes a new item to the element.
+   * @param value the value
+   */
+  writeValue(value: string[]): void {
+    this.keyListModel = value;
+    this.updateChanges();
   }
 
   /**
@@ -49,7 +49,7 @@ export class MultiKeyPickerComponent implements OnInit {
    * @param fn
    */
   registerOnChange(fn: any): void {
-      this.onChange = fn;
+    this.onChange = fn;
   }
 
   /**
@@ -57,10 +57,37 @@ export class MultiKeyPickerComponent implements OnInit {
    * @param fn
    */
   registerOnTouched(fn: any): void {
-      this.onTouched = fn;
+    this.onTouched = fn;
   }
   @Input() lookupList: KeyValuePair<string, string>[];
-  keyListModel:string[];
+  keyListModel: string[];
+  getValueFromKey = (key: string) => {
+    let matches = this.lookupList.filter(kvp => kvp.Key == key);
+    if (matches.length > 0) {
+      return matches[0].Value;
+    }
+    else {
+      return "";
+    }
+  }
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.lookupList.filter(v => v.Value.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10).map(v => v.Key))
+    );
+  removeKeyFromList = (ordinal: number) => {
+    this.keyListModel.splice(ordinal, 1);
+  }
+  @Input() allowDuplicates:Boolean;
+  keyToAdd: string;
+  addKeyToList = () => {
+    if (this.keyToAdd) {
+      this.keyListModel.push(this.keyToAdd);
+      this.keyToAdd = "";
+    }
+  }
   constructor() { }
 
   ngOnInit() {

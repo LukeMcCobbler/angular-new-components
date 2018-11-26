@@ -1,3 +1,14 @@
 <div>
-  <span *ngFor="let itemKey of keyListMode ">{{itemKey}}</span>
+  <div>
+    <span *ngFor="let itemKey of keyListModel;let idx = index" class="ng-value">
+      <span aria-hidden="true" (click)="removeKeyFromList(idx)" class="ng-value-icon left">×</span><span class="ng-value-label">{{getValueFromKey(itemKey)}}</span>
+    </span>
+  </div>
+  <ng-template #rt let-r="result" let-t="term">
+    <ngb-highlight [result]="getValueFromKey(r)" [term]="t"></ngb-highlight>
+  </ng-template>
+  <div>
+    <input id="typeahead-basic" type="text" class="form-control" [editable]="false" [(ngModel)]="keyToAdd"
+      (ngModelChange)="addKeyToList()" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="getValueFromKey" />
+  </div>
 </div>
